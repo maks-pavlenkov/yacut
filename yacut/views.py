@@ -23,13 +23,13 @@ def get_unique_short_id():
 
 @app.route('/', methods=['GET', 'POST'])
 def generate_link():
-    short_version = 'http://127.0.0.1:5000/'
+    short_version = 'http://localhost/'
     form = LinksForm()
     if form.validate_on_submit():
         user_link = form.custom_id.data
         if user_link:
             if URLMap.query.filter_by(short=user_link).first():
-                flash('Такая ссылка уже существует!')
+                flash(f'Имя {user_link} уже занято!')
                 return render_template('link_part.html', form=form)
             pair_of_links = URLMap(
                 original=form.original_link.data,
