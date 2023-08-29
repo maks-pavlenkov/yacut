@@ -1,13 +1,14 @@
 import string
 from random import choice, randint, shuffle
-from . import app, db
 from flask import abort, flash, redirect, render_template
 from .forms import LinksForm
 from .models import URLMap
+from . import app, db
+
+SHORT_VERSION = 'http://localhost/'
 
 
 def get_unique_short_id():
-    # short_version = 'http://127.0.0.1:5000/'
     final = ''
     for _ in range(2):
         random_upper = choice(string.ascii_uppercase)
@@ -23,7 +24,6 @@ def get_unique_short_id():
 
 @app.route('/', methods=['GET', 'POST'])
 def generate_link():
-    short_version = 'http://localhost/'
     form = LinksForm()
     if form.validate_on_submit():
         user_link = form.custom_id.data
@@ -37,7 +37,7 @@ def generate_link():
             )
             db.session.add(pair_of_links)
             db.session.commit()
-            return render_template('link_part.html', form=form, link=short_version + form.custom_id.data)
+            return render_template('link_part.html', form=form, link=SHORT_VERSION + form.custom_id.data)
         else:
             short_generated = get_unique_short_id()
             pair_of_links = URLMap(
@@ -46,7 +46,7 @@ def generate_link():
             )
             db.session.add(pair_of_links)
             db.session.commit()
-            return render_template('link_part.html', form=form, link=short_generated)
+            return render_template('link_part.html', form=form, link=SHORT_VERSION + short_generated)
     return render_template('link_part.html', form=form)
 
 
