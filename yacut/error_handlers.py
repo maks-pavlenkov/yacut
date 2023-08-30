@@ -1,6 +1,6 @@
 from flask import jsonify, render_template
 from . import app
-from errors import InvalidAPIUsage
+from .errors import InvalidAPIUsage
 
 
 @app.errorhandler(InvalidAPIUsage)
