@@ -58,7 +58,7 @@
           <div class="col-sm">
             <p class="text-center">
               {% if link is defined %}
-                <h5 class="text-center">Ваша новая ссылка готова: <a href="{{ link }}">{{ link }}</a></h5>
+                <h5 class="text-center">Ваша новая ссылка готова: <a href="{{ url_for('redirecting', short_id=link, _external=True) }}">{{ url_for('redirecting', short_id=link, _external=True) }}</a></h5>
               {% endif %}
             </p>
           </div>

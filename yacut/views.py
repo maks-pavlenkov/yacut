@@ -5,8 +5,6 @@ from .forms import LinksForm
 from .models import URLMap
 from . import app, db
 
-SHORT_VERSION = 'http://localhost/'
-
 
 def get_unique_short_id():
     final = ''
@@ -37,7 +35,7 @@ def generate_link():
             )
             db.session.add(pair_of_links)
             db.session.commit()
-            return render_template('link_part.html', form=form, link=SHORT_VERSION + form.custom_id.data)
+            return render_template('link_part.html', form=form, link=form.custom_id.data)
         else:
             short_generated = get_unique_short_id()
             pair_of_links = URLMap(
@@ -46,7 +44,7 @@ def generate_link():
             )
             db.session.add(pair_of_links)
             db.session.commit()
-            return render_template('link_part.html', form=form, link=SHORT_VERSION + short_generated)
+            return render_template('link_part.html', form=form, link=short_generated)
     return render_template('link_part.html', form=form)
 
 

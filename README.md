@@ -1,4 +1,4 @@
-Клонировать репозиторий и перейти в него в командной строке:
+aКлонировать репозиторий и перейти в него в командной строке:
 
 ```
 git clone 
@@ -20,7 +20,7 @@ python3 -m venv venv
     source venv/bin/activate
     ```
 
-* Если у вас windows
+* сли у вас windows
 
     ```
     source venv/scripts/activate
@@ -35,3 +35,25 @@ python3 -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+
+Запуск проекта
+```
+flask run
+```
+
+У проекта есть API
+- api/id/ - POST запрос на создание новой короткой ссылки
+- api/id/<short_id>/ - GET запрос на получение оригинальной ссылки по указанному короткому идентификатору
+
+Примеры запросов 
+1.
+{
+  "url": "string",
+  "custom_id": "string"
+}
+2.api/id/short_link 
+Пример ответа
+
+{
+  "url": "string"
+}
